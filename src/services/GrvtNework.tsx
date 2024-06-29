@@ -1,7 +1,7 @@
 type ApiMethods = "GET" | "POST";
-const API_KEY = ""; // api key not at client
+const API_KEY = "81151d63-f9d2-4863-ba82-d1f5c8b56280"; // api key not at client
 
-const BASE_URL = "https://pro-api.coinmarketcap.com"; // will set up env file and put base url to env config
+const BASE_URL = "https://pro-api.coinmarketcap.com"; // will set up env file and put ase url to env config
 
 const createRequest = async (
   endpoint: string,

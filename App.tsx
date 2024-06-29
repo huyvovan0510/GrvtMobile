@@ -5,12 +5,16 @@ import {
   SafeAreaProvider,
 } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import Toast from "react-native-toast-message";
+import useNetInfo from "./src/hooks/useNetInfo";
 
 export default function App() {
+  useNetInfo();
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <HomeScreen />
       <StatusBar style="auto" />
+      <Toast />
     </SafeAreaProvider>
   );
 }

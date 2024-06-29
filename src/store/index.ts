@@ -13,6 +13,11 @@ export type PriceDataStore = {
   updatePriceRealTime: (data: CoinPrice) => void;
 };
 
+export type NetWorkStore = {
+  isOnline: boolean;
+  updateNetwork: (isOnline: boolean) => void;
+};
+
 export const useListingCoinStore = create<ListingCoinStore>()(
   persist(
     (set) => ({
@@ -46,3 +51,12 @@ export const usePriceRealTimeStore = create<PriceDataStore>()(
     }
   )
 );
+
+export const useNetWorkConnectStore = create<NetWorkStore>((set) => ({
+  isOnline: true,
+  updateNetwork: (value: boolean) => {
+    set(() => ({
+      isOnline: value,
+    }));
+  },
+}));

@@ -87,12 +87,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     flex: 1,
     paddingBottom: 0,
+    paddingTop: 16,
   },
   space: {
     height: SPACE,
   },
   listContainerStyle: {
-    paddingVertical: 32,
+    paddingVertical: 24,
   },
   emptyView: {
     height: "100%",

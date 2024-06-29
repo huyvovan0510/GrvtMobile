@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getListing } from "../services";
-import { useListingCoinStore } from "../store";
+import { useListingCoinStore, useNetWorkConnectStore } from "../store";
 import { LIMIT_ITEM } from "../constants";
 
 const useHandleListing = () => {
   const [query, setQuery] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const isOnline = useNetWorkConnectStore((state) => state.isOnline);
   const updateListCoins = useListingCoinStore((state) => state.updateListCoins);
   const listCoins = useListingCoinStore((state) => state.listCoins);
   const currentCursor = useRef(1);
@@ -27,7 +28,7 @@ const useHandleListing = () => {
       currentCursor.current = 1;
       const response = await getListing({ cursor: 1 });
       const { data } = response;
-      if (data?.length > 0) {
+      if (!!data || data?.length > 0) {
         updateListCoins(data);
       }
     } catch (error) {
@@ -49,7 +50,7 @@ const useHandleListing = () => {
       const response = await getListing({ cursor });
       const { data } = response;
 
-      if (data?.length < 0) return;
+      if (!data || data?.length < 0) return;
 
       if (cursor === 1) {
         updateListCoins(data);
@@ -79,7 +80,7 @@ const useHandleListing = () => {
   return {
     listCoinsData: listFilter,
     onSearch,
-    isLoading: listFilter?.length < 0 && isLoading,
+    isLoading,
     onRefresh,
     onLoadMore,
   };
