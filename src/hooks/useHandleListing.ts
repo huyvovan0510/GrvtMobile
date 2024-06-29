@@ -13,8 +13,10 @@ const useHandleListing = () => {
 
   const listFilter = useMemo(() => {
     if (!query) return listCoins;
-    return listCoins?.filter((item) =>
-      item?.symbol.toLowerCase().includes(query.toLowerCase())
+    return listCoins?.filter(
+      (item) =>
+        item?.symbol.toLowerCase().includes(query.toLowerCase()) ||
+        item?.name.toLowerCase().includes(query.toLowerCase())
     );
   }, [listCoins, query]);
 
